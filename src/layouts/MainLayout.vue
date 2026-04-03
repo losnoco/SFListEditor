@@ -4,7 +4,10 @@
   <q-layout v-else view="hHh lpr fFf">
     <q-header class="wco-header">
       <q-toolbar class="wco-toolbar">
-        <q-toolbar-title class="wco-drag">SFList JSON Editor</q-toolbar-title>
+        <q-toolbar-title class="wco-drag">
+          SFList JSON Editor
+          <q-tooltip>Built {{ buildTime }}</q-tooltip>
+        </q-toolbar-title>
 
         <div class="row no-wrap items-center q-gutter-xs wco-actions">
           <q-btn flat dense icon="note_add" @click="newDocument">
@@ -83,6 +86,8 @@ const store = useSflistStore();
 const cacheStore = useSoundbankCacheStore();
 const fileInputRef = ref<HTMLInputElement>();
 const rightDrawerOpen = ref(true);
+
+const buildTime = new Date(process.env.BUILD_TIMESTAMP).toLocaleString();
 
 const consentGranted = ref(
   localStorage.getItem('storageConsent') === 'granted',

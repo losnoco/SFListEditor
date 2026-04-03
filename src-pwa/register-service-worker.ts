@@ -1,4 +1,5 @@
 import { register } from 'register-service-worker';
+import { Notify } from 'quasar';
 
 register(process.env.SERVICE_WORKER_FILE, {
   ready() {
@@ -13,8 +14,23 @@ register(process.env.SERVICE_WORKER_FILE, {
     console.log('New content is downloading.');
   },
 
-  updated() {
-    console.log('New content is available; please refresh.');
+  updated(registration) {
+    Notify.create({
+      message: 'A new version is available.',
+      color: 'primary',
+      timeout: 0,
+      actions: [
+        {
+          label: 'Refresh',
+          color: 'white',
+          handler() {
+            registration.waiting?.postMessage({ type: 'SKIP_WAITING' });
+            window.location.reload();
+          },
+        },
+        { label: 'Dismiss', color: 'white' },
+      ],
+    });
   },
 
   offline() {

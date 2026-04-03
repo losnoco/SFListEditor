@@ -1,6 +1,8 @@
 import { defineConfig } from '#q-app/wrappers';
 
 export default defineConfig(() => {
+  const buildTimestamp = new Date().toISOString();
+
   return {
     boot: [],
 
@@ -20,6 +22,10 @@ export default defineConfig(() => {
       typescript: {
         strict: true,
         vueShim: true,
+      },
+
+      env: {
+        BUILD_TIMESTAMP: buildTimestamp,
       },
 
       vueRouterMode: 'hash',
@@ -69,7 +75,6 @@ export default defineConfig(() => {
       swFilename: 'sw.js',
       manifestFilename: 'manifest.json',
       extendGenerateSWOptions(cfg) {
-        cfg.skipWaiting = true;
         cfg.clientsClaim = true;
       },
     },
