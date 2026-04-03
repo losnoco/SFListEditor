@@ -2,11 +2,11 @@
   <StorageConsent v-if="!consentGranted" @accepted="consentGranted = true" />
 
   <q-layout v-else view="hHh lpr fFf">
-    <q-header>
-      <q-toolbar>
-        <q-toolbar-title>SFList JSON Editor</q-toolbar-title>
+    <q-header class="wco-header">
+      <q-toolbar class="wco-toolbar">
+        <q-toolbar-title class="wco-drag">SFList JSON Editor</q-toolbar-title>
 
-        <div class="row no-wrap items-center q-gutter-xs">
+        <div class="row no-wrap items-center q-gutter-xs wco-actions">
           <q-btn flat dense icon="note_add" @click="newDocument">
             <q-tooltip>New</q-tooltip>
           </q-btn>

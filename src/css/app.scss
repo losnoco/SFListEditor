@@ -111,6 +111,36 @@ code:not(pre code) {
   }
 }
 
+// ─── Window Controls Overlay ─────────────────────────────────────────────────
+// When the PWA is installed and WCO is active, the header becomes the titlebar.
+// The title area is draggable, and content is inset to avoid the window controls.
+
+@media (display-mode: window-controls-overlay) {
+  .wco-header {
+    // Extend to the top edge, accounting for the titlebar inset
+    padding-top: env(titlebar-area-y, 0);
+  }
+
+  .wco-toolbar {
+    // Constrain toolbar content within the titlebar area
+    padding-left: env(titlebar-area-x, 0);
+    padding-right: calc(100% - env(titlebar-area-x, 0) - env(titlebar-area-width, 100%));
+    min-height: env(titlebar-area-height, 52px);
+  }
+
+  .wco-drag {
+    // Make the title draggable so the window can be moved
+    -webkit-app-region: drag;
+    app-region: drag;
+  }
+
+  .wco-actions {
+    // Buttons must not be draggable
+    -webkit-app-region: no-drag;
+    app-region: no-drag;
+  }
+}
+
 // ─── Footer ───────────────────────────────────────────────────────────────────
 
 .q-footer {

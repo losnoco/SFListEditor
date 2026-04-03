@@ -3,6 +3,7 @@
   "short_name": "SFList Editor",
   "description": "A visual editor for the SFList JSON SoundFont playlist format",
   "display": "standalone",
+  "display_override": ["window-controls-overlay"],
   "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#1976d2",
