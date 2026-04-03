@@ -1,1 +1,268 @@
-// app global css in SCSS form
+// app global css — LoSnoCo design language
+
+@import url("https://assets.losno.co/fonts/inter/stylesheet.css");
+@import url("https://assets.losno.co/fonts/IosevkaLoSnoCoNoLig/IosevkaLoSnoCoNoLig.css");
+
+// Override Quasar components that explicitly set font-family to Roboto
+.q-field,
+.q-btn,
+.q-item,
+.q-list,
+.q-menu,
+.q-card,
+.q-badge,
+.q-chip,
+.q-tab,
+.q-tabs,
+.q-tab-panels,
+.q-select,
+.q-expansion-item,
+.q-toolbar,
+.q-toolbar__title,
+.q-table {
+  font-family: 'Inter LoSnoCo', sans-serif;
+}
+
+// ─── Design tokens ────────────────────────────────────────────────────────────
+
+:root {
+  // Brand
+  --orange:     #F25E0D;
+  --teal:       #0DF2C9;
+  --teal-light: #00967F;
+  --purple:     #7B41B9;
+
+  // UI surfaces
+  --bg:      #F4F3F0;
+  --surface: #ECEAE5;
+  --border:  #D8D5CE;
+  --muted:   #888880;
+  --text:    #1A1917;
+}
+
+// ─── Base ─────────────────────────────────────────────────────────────────────
+
+html,
+body {
+  font-family: 'Inter LoSnoCo', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.q-page-container,
+.q-page {
+  background: var(--bg);
+}
+
+code,
+kbd,
+pre {
+  font-family: 'Iosevka LoSnoCo NoLig Web', monospace;
+}
+
+code:not(pre code) {
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.07);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+}
+
+// ─── Section label ────────────────────────────────────────────────────────────
+
+.sec-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.5rem;
+}
+
+// ─── Header / nav ─────────────────────────────────────────────────────────────
+
+.q-header {
+  background: rgba(244, 243, 240, 0.92) !important;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  color: var(--text) !important;
+  box-shadow: none !important;
+}
+
+.q-toolbar {
+  min-height: 52px;
+}
+
+.q-toolbar__title {
+  font-family: 'Inter LoSnoCo', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+// Header icon buttons — muted at rest, text on hover
+.q-header .q-btn {
+  color: var(--muted) !important;
+  transition: color 0.12s;
+
+  &:hover {
+    color: var(--text) !important;
+  }
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+
+.q-footer {
+  background: var(--surface) !important;
+  border-top: 1px solid var(--border);
+  color: var(--text) !important;
+  box-shadow: none !important;
+}
+
+// ─── Drawer ───────────────────────────────────────────────────────────────────
+
+.q-drawer {
+  background: var(--bg) !important;
+  border-left: 1px solid var(--border);
+  box-shadow: none !important;
+}
+
+// ─── Inputs & selects ─────────────────────────────────────────────────────────
+
+.q-field--outlined .q-field__control {
+  background: var(--surface);
+}
+
+.q-field--outlined .q-field__control:before {
+  border-color: var(--border) !important;
+}
+
+.q-field--outlined:hover .q-field__control:before {
+  border-color: var(--muted) !important;
+}
+
+.q-field__label {
+  color: var(--muted) !important;
+  font-size: 0.875rem;
+}
+
+.q-field__native,
+.q-field__input {
+  color: var(--text) !important;
+  font-family: 'Inter LoSnoCo', sans-serif;
+}
+
+// ─── Badges ───────────────────────────────────────────────────────────────────
+
+.q-badge {
+  font-family: 'Iosevka LoSnoCo NoLig Web', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.08) !important;
+  color: var(--text) !important;
+  border-radius: 4px;
+}
+
+// ─── Dialog / card ────────────────────────────────────────────────────────────
+
+.q-dialog .q-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+.q-card__section--vert:first-child {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.75rem;
+}
+
+.q-card .text-h6 {
+  font-family: 'Inter LoSnoCo', sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+// ─── Quasar menu popup ────────────────────────────────────────────────────────
+
+.q-menu {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  font-size: 0.875rem;
+  color: var(--text);
+}
+
+// ─── Skeleton loader ──────────────────────────────────────────────────────────
+
+.q-skeleton {
+  background: var(--surface) !important;
+
+  &::after {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.5),
+      transparent
+    ) !important;
+  }
+}
+
+// ─── Tooltips ─────────────────────────────────────────────────────────────────
+
+.q-tooltip {
+  font-family: 'Inter LoSnoCo', sans-serif;
+  font-size: 0.75rem;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 4px;
+}
+
+// ─── Dark theme ───────────────────────────────────────────────────────────────
+// Quasar adds .body--dark to <body> when dark mode is active.
+
+.body--dark {
+  // Surface tokens — cool teal-tinted dark palette
+  --bg:      #111C1A;
+  --surface: #182926;
+  --border:  #243D38;
+  --muted:   #7A9E98;
+  --text:    #E5EFED;
+
+  // Full teal replaces teal-light as the interactive/primary color on dark surfaces
+  --q-primary: #0DF2C9;
+
+  // Header backdrop — dark equivalent of rgba(244, 243, 240, 0.92)
+  .q-header {
+    background: rgba(17, 28, 26, 0.92) !important;
+  }
+
+  // Inline code — switch from black tint to white tint on dark surfaces
+  code:not(pre code) {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  // Badge — switch from black tint to white tint
+  .q-badge {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  // Skeleton shimmer — increase white flash intensity on dark bg
+  .q-skeleton::after {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent
+    ) !important;
+  }
+
+  // Dialog shadow — darker value for dark surfaces
+  .q-dialog .q-card {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  }
+}

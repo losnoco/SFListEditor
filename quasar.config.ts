@@ -26,7 +26,7 @@ export default defineConfig((/* ctx */) => {
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      'roboto-font', // optional, you are not bound to it
+      // roboto-font replaced by Inter LoSnoCo loaded via app.scss
       'material-icons', // optional, you are not bound to it
     ],
 
@@ -45,7 +45,7 @@ export default defineConfig((/* ctx */) => {
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
       // vueRouterBase,
-      // vueDevtools,
+      vueDevtools: true,
       // vueOptionsAPI: false,
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
@@ -64,6 +64,9 @@ export default defineConfig((/* ctx */) => {
 
       vitePlugins: [
         [
+          'vite-plugin-vue-devtools',
+        ],
+        [
           'vite-plugin-checker',
           {
             vueTsc: true,
@@ -73,6 +76,7 @@ export default defineConfig((/* ctx */) => {
             },
           },
           { server: false },
+
         ],
       ],
     },
@@ -85,7 +89,13 @@ export default defineConfig((/* ctx */) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
     framework: {
-      config: {},
+      config: {
+        dark: 'auto',
+        loadingBar: {
+          color: 'accent',
+          size: '8px',
+        },
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
@@ -98,7 +108,11 @@ export default defineConfig((/* ctx */) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: [],
+      plugins: [
+        'LoadingBar',
+        'Dialog',
+        'Notify',
+      ],
     },
 
     // animations: 'all', // --- includes all animations
