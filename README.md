@@ -1,43 +1,36 @@
-# SFList JSON Editor (sflist-editor)
+# SFList JSON Editor
 
-A Quasar Project
+A visual editor for the [SFList JSON format](https://gist.github.com/kode54/a7bb01a0db3f2e996145b77f0ca510d5) — a SoundFont playlist format used with BASS MIDI.
 
-## Install the dependencies
+**Live at [sflist.losno.co](https://sflist.losno.co)**
+
+## Features
+
+- Create, open, and save `.sflist.json` files
+- Add SoundFont entries (.sf2, .sf3, .sfz) and nested .sflist.json includes
+- Edit gain, MIDI channel assignments (1-48), and patch mappings per entry
+- Load SF2/SF3 files to populate a searchable preset picker grouped by bank, with drums sorted to the bottom
+- Live JSON preview sidebar with copy-to-clipboard
+- Reorderable entry list with animated transitions
+- All state persisted to localStorage (with consent gate)
+
+## Important
+
+The `.sflist.json` file must live in the same directory as your SoundFont files, since it references them by relative path.
+
+## Development
 
 ```bash
-yarn
-# or
 npm install
+npx quasar dev
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+## Build
 
 ```bash
-quasar dev
+npx quasar build
 ```
 
-### Lint the files
+## License
 
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-### Format the files
-
-```bash
-yarn format
-# or
-npm run format
-```
-
-### Build the app for production
-
-```bash
-quasar build
-```
-
-### Customize the configuration
-
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+Copyright (C) LoSnoCo. All rights reserved.
