@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import { watch } from 'vue';
-import { SoundBankLoader } from 'spessasynth_core';
 import type { CachedPreset, CachedSoundBankInfo } from 'src/types/soundbank-info';
 
 const STORAGE_KEY = 'sflist-soundbank-cache';
@@ -56,6 +55,7 @@ export const useSoundbankCacheStore = defineStore('soundbank-cache', {
     },
 
     async loadAndCache(key: string, file: File): Promise<CachedSoundBankInfo> {
+      const { SoundBankLoader } = await import('spessasynth_core');
       const buffer = await file.arrayBuffer();
       const soundBank = SoundBankLoader.fromArrayBuffer(buffer);
 

@@ -16,25 +16,24 @@
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn flat label="Decline" color="negative" @click="declined = true" />
+        <q-btn flat icon="info" @click="aboutOpen = true">
+          <q-tooltip>About</q-tooltip>
+        </q-btn>
+        <q-space />
         <q-btn unelevated label="Allow" color="primary" @click="accept" />
       </q-card-actions>
-
-      <q-card-section v-if="declined">
-        <q-banner dense class="text-negative">
-          This app requires local storage to function. Please allow storage to
-          continue.
-        </q-banner>
-      </q-card-section>
     </q-card>
+
+    <AboutDialog v-model="aboutOpen" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import AboutDialog from 'components/AboutDialog.vue';
 
 const emit = defineEmits<{ accepted: [] }>();
-const declined = ref(false);
+const aboutOpen = ref(false);
 
 function accept() {
   localStorage.setItem('storageConsent', 'granted');

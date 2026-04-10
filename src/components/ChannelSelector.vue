@@ -1,23 +1,25 @@
 <template>
-  <div>
+  <div class="channel-selector">
     <div class="sec-label">Channels</div>
-    <div v-for="port in 3" :key="port" class="channel-row q-mb-xs">
-      <span class="port-label text-caption" style="color: var(--muted)">
-        {{ (port - 1) * 16 + 1 }}&ndash;{{ port * 16 }}
-      </span>
-      <q-chip
-        v-for="ch in 16"
-        :key="ch"
-        dense
-        clickable
-        :color="isSelected(channelNum(port, ch)) ? 'primary' : undefined"
-        :text-color="isSelected(channelNum(port, ch)) ? 'white' : undefined"
-        :outline="!isSelected(channelNum(port, ch))"
-        size="sm"
-        @click="toggle(channelNum(port, ch))"
-      >
-        {{ channelNum(port, ch) }}
-      </q-chip>
+    <div class="channel-grid">
+      <template v-for="port in 3" :key="port">
+        <span class="port-label text-caption" style="color: var(--muted)">
+          {{ (port - 1) * 16 + 1 }}&ndash;{{ port * 16 }}
+        </span>
+        <q-chip
+          v-for="ch in 16"
+          :key="ch"
+          dense
+          clickable
+          :color="isSelected(channelNum(port, ch)) ? 'primary' : undefined"
+          :text-color="isSelected(channelNum(port, ch)) ? 'white' : undefined"
+          :outline="!isSelected(channelNum(port, ch))"
+          size="sm"
+          @click="toggle(channelNum(port, ch))"
+        >
+          {{ channelNum(port, ch) }}
+        </q-chip>
+      </template>
     </div>
     <q-btn
       v-if="selected.length > 0"
@@ -62,15 +64,25 @@ function toggle(ch: number) {
 </script>
 
 <style scoped>
-.channel-row {
-  display: flex;
+.channel-selector {
+  display: inline-block;
+}
+
+.channel-grid {
+  display: grid;
+  grid-template-columns: auto repeat(16, min-content);
   align-items: center;
-  gap: 2px;
-  flex-wrap: wrap;
+  justify-content: end;
+  gap: 2px 2px;
 }
 
 .port-label {
-  min-width: 48px;
   font-size: 0.7rem;
+  text-align: right;
+  padding-right: 4px;
+}
+
+.channel-grid :deep(.q-chip__content) {
+  justify-content: flex-end;
 }
 </style>

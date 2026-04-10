@@ -30,7 +30,26 @@
           >
             <q-tooltip>{{ rightDrawerOpen ? 'Hide' : 'Show' }} JSON</q-tooltip>
           </q-btn>
+
+          <q-separator vertical inset class="q-mx-xs" />
+
+          <q-btn flat dense icon="info" @click="aboutOpen = true">
+            <q-tooltip>About</q-tooltip>
+          </q-btn>
+
+          <q-btn
+            v-if="isDev"
+            flat
+            dense
+            icon="lock_reset"
+            color="negative"
+            @click="revokeConsent"
+          >
+            <q-tooltip>Revoke consent &amp; reload (dev)</q-tooltip>
+          </q-btn>
         </div>
+
+        <AboutDialog v-model="aboutOpen" />
 
         <input
           ref="fileInputRef"
@@ -80,14 +99,17 @@ import { useQuasar } from 'quasar';
 import { useSflistStore } from 'stores/sflist-store';
 import { useSoundbankCacheStore } from 'stores/soundbank-cache-store';
 import StorageConsent from 'components/StorageConsent.vue';
+import AboutDialog from 'components/AboutDialog.vue';
 
 const $q = useQuasar();
 const store = useSflistStore();
 const cacheStore = useSoundbankCacheStore();
 const fileInputRef = ref<HTMLInputElement>();
 const rightDrawerOpen = ref(true);
+const aboutOpen = ref(false);
 
 const buildTime = new Date(process.env.BUILD_TIMESTAMP).toLocaleString();
+const isDev = process.env.DEV;
 
 const consentGranted = ref(
   localStorage.getItem('storageConsent') === 'granted',
@@ -148,6 +170,11 @@ function saveFile() {
   a.click();
   URL.revokeObjectURL(url);
   store.dirty = false;
+}
+
+function revokeConsent() {
+  localStorage.removeItem('storageConsent');
+  window.location.reload();
 }
 
 function copyJson() {

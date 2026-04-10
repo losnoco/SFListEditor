@@ -1,7 +1,11 @@
+import { readFileSync } from 'node:fs';
 import { defineConfig } from '#q-app/wrappers';
 
 export default defineConfig(() => {
   const buildTimestamp = new Date().toISOString();
+  const { version } = JSON.parse(readFileSync('./package.json', 'utf-8')) as {
+    version: string;
+  };
 
   return {
     boot: [],
@@ -26,6 +30,7 @@ export default defineConfig(() => {
 
       env: {
         BUILD_TIMESTAMP: buildTimestamp,
+        APP_VERSION: version,
       },
 
       vueRouterMode: 'hash',

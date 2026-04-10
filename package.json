@@ -1,11 +1,12 @@
 {
   "name": "sflist-editor",
-  "version": "0.0.1",
+  "version": "1.5.0",
   "description": "A visual editor for the SFList JSON SoundFont playlist format",
   "productName": "SFList JSON Editor",
   "author": "Kevin López B <kevin@kddlb.cl>",
   "type": "module",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{ts,js,cjs,mjs,vue}\"",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
