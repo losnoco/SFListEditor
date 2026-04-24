@@ -20,7 +20,7 @@
           <q-tooltip>About</q-tooltip>
         </q-btn>
         <q-space />
-        <q-btn unelevated label="Allow" color="primary" @click="accept" />
+        <q-btn unelevated label="Allow" color="accent" @click="accept" />
       </q-card-actions>
     </q-card>
 

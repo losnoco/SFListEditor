@@ -1,5 +1,5 @@
 <template>
-  <StorageConsent v-if="!consentGranted" @accepted="consentGranted = true" />
+  <StorageConsent v-if="!consentGranted" @accepted="onConsentAccepted" />
 
   <q-layout v-else view="hHh lpr fFf">
     <q-header class="wco-header">
@@ -115,10 +115,19 @@ const consentGranted = ref(
   localStorage.getItem('storageConsent') === 'granted',
 );
 
+function enablePersistence() {
+  store.enablePersistence();
+  cacheStore.enablePersistence();
+}
+
+function onConsentAccepted() {
+  consentGranted.value = true;
+  enablePersistence();
+}
+
 onMounted(() => {
   if (consentGranted.value) {
-    store.enablePersistence();
-    cacheStore.enablePersistence();
+    enablePersistence();
   }
 });
 

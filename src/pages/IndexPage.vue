@@ -29,7 +29,7 @@
       <q-btn
         fab
         icon="add"
-        color="primary"
+        color="accent"
         @click="addFileInput?.click()"
       >
         <q-tooltip>Add SoundFont</q-tooltip>
@@ -39,7 +39,7 @@
     <input
       ref="addFileInput"
       type="file"
-      accept=".sf2,.sf3,.sfz,.sflist.json,.json"
+      accept=".sf2,.sf3,.sfz,.dls,.sflist.json,.json"
       multiple
       style="display: none"
       @change="onFilePicked"
@@ -102,7 +102,7 @@ async function onFilePicked(event: Event) {
 
       store.addEntry({ fileName: name });
 
-      if (type === 'sf2' || type === 'sf3') {
+      if (type === 'sf2' || type === 'sf3' || type === 'dls') {
         loadingFiles.add(name);
         try {
           await cacheStore.loadAndCache(name, file);

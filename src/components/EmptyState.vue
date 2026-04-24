@@ -1,6 +1,6 @@
 <template>
   <div class="empty-state">
-    <q-icon name="library_music" size="64px" color="grey-5" />
+    <q-icon name="library_music" size="64px" style="color: var(--muted)" />
     <div class="text-h6 q-mt-md" style="color: var(--muted)">
       No SoundFonts yet
     </div>

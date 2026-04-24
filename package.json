@@ -1,6 +1,6 @@
 {
   "name": "sflist-editor",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "A visual editor for the SFList JSON SoundFont playlist format",
   "productName": "SFList JSON Editor",
   "author": "Kevin López B <kevin@kddlb.cl>",
@@ -11,15 +11,14 @@
     "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{ts,js,cjs,mjs,vue}\"",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
-    "dev": "quasar dev -m pwa",
-    "build": "quasar build -m pwa",
+    "dev": "quasar dev -m spa",
+    "build": "quasar build -m spa",
     "postinstall": "quasar prepare"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
     "pinia": "^3.0.1",
     "quasar": "^2.16.0",
-    "register-service-worker": "^1.7.2",
     "spessasynth_core": "^4.2.7",
     "vue": "^3.5.22",
     "vue-router": "^5.0.3"
@@ -39,14 +38,7 @@
     "vite-plugin-checker": "^0.12.0",
     "vite-plugin-vue-devtools": "^8.1.1",
     "vue-eslint-parser": "^10.4.0",
-    "vue-tsc": "^3.2.6",
-    "workbox-build": "^7.0.0",
-    "workbox-cacheable-response": "^7.0.0",
-    "workbox-core": "^7.0.0",
-    "workbox-expiration": "^7.0.0",
-    "workbox-precaching": "^7.0.0",
-    "workbox-routing": "^7.0.0",
-    "workbox-strategies": "^7.0.0"
+    "vue-tsc": "^3.2.6"
   },
   "engines": {
     "node": "^28 || ^26 || ^24 || ^22.12",

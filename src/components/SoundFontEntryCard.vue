@@ -8,7 +8,7 @@
         <div class="ellipsis" style="font-weight: 500">
           {{ entry.fileName }}
         </div>
-        <div v-if="isSf2OrSf3" class="text-caption preset-status">
+        <div v-if="hasPresetSupport" class="text-caption preset-status">
           <template v-if="loading">
             <q-spinner size="12px" class="q-mr-xs" />
             Loading...
@@ -137,7 +137,9 @@ const expanded = ref(false);
 const isInclude = computed(() => isIncludeEntry(props.entry));
 const isSfz = computed(() => isSfzEntry(props.entry));
 const fileType = computed(() => getFileType(props.entry.fileName));
-const isSf2OrSf3 = computed(() => fileType.value === 'sf2' || fileType.value === 'sf3');
+const hasPresetSupport = computed(
+  () => fileType.value === 'sf2' || fileType.value === 'sf3' || fileType.value === 'dls',
+);
 const hasCache = computed(() => cacheStore.hasCache(props.entry.fileName));
 const presetCount = computed(() => cacheStore.getPresets(props.entry.fileName).length);
 const bankName = computed(() => cacheStore.getInfo(props.entry.fileName)?.name ?? '');

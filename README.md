@@ -33,4 +33,4 @@ npx quasar build
 
 ## License
 
-[MIT](LICENSE) — Copyright (c) 2025 LoSnoCo / Kevin López B
+[MIT](LICENSE) — Copyright (c) 2026 LoSnoCo / Kevin López B

@@ -73,15 +73,5 @@ export default defineConfig(() => {
     },
 
     animations: [],
-
-    pwa: {
-      workboxMode: 'GenerateSW',
-      injectPwaMetaTags: true,
-      swFilename: 'sw.js',
-      manifestFilename: 'manifest.json',
-      extendGenerateSWOptions(cfg) {
-        cfg.clientsClaim = true;
-      },
-    },
   };
 });

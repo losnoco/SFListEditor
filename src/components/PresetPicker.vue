@@ -42,7 +42,7 @@
 
     <template #no-option>
       <q-item>
-        <q-item-section class="text-grey">No presets found</q-item-section>
+        <q-item-section style="color: var(--muted)">No presets found</q-item-section>
       </q-item>
     </template>
   </q-select>
@@ -184,9 +184,9 @@ function onSelect(val: PatchAddress | null) {
 
 <style scoped>
 .bank-header {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--orange);
   padding: 8px 16px 4px;
