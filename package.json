@@ -1,6 +1,6 @@
 {
   "name": "sflist-editor",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "A visual editor for the SFList JSON SoundFont playlist format",
   "productName": "SFList JSON Editor",
   "author": "Kevin López B <kevin@kddlb.cl>",
