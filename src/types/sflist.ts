@@ -29,9 +29,10 @@ export function isSfzEntry(entry: SoundFontEntry): boolean {
 
 export function getFileType(
   fileName: string,
-): 'sf2' | 'sf3' | 'sfz' | 'dls' | 'sflist' | 'unknown' {
+): 'sf2' | 'sf3' | 'sfz' | 'dls' | 'sflist' | 'sflist-legacy' | 'unknown' {
   const lower = fileName.toLowerCase();
   if (lower.endsWith('.sflist.json')) return 'sflist';
+  if (lower.endsWith('.sflist')) return 'sflist-legacy';
   if (lower.endsWith('.sf2')) return 'sf2';
   if (lower.endsWith('.sf3')) return 'sf3';
   if (lower.endsWith('.sfz')) return 'sfz';

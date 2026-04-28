@@ -82,6 +82,12 @@ export const useSflistStore = defineStore('sflist', {
       this.dirty = false;
     },
 
+    loadDocument(doc: SFListDocument, fileName: string) {
+      this.document = doc;
+      this.currentFileName = fileName;
+      this.dirty = false;
+    },
+
     addEntry(entry: SoundFontEntry) {
       this.document.soundFonts.push(entry);
       this.dirty = true;

@@ -54,7 +54,8 @@
         <input
           ref="fileInputRef"
           type="file"
-          accept=".sflist.json,.json"
+          accept=".sflist.json,.json,.sflist"
+          data-open-sflist
           style="display: none"
           @change="onFileOpened"
         />
@@ -98,6 +99,8 @@ import { ref, onMounted } from 'vue';
 import { useQuasar } from 'quasar';
 import { useSflistStore } from 'stores/sflist-store';
 import { useSoundbankCacheStore } from 'stores/soundbank-cache-store';
+import { getFileType } from 'src/types/sflist';
+import { parseLegacySflist } from 'src/utils/sflist-legacy-parser';
 import StorageConsent from 'components/StorageConsent.vue';
 import AboutDialog from 'components/AboutDialog.vue';
 
@@ -157,7 +160,13 @@ async function onFileOpened(event: Event) {
 
   try {
     const text = await file.text();
-    store.loadFromJson(text, file.name);
+    const type = getFileType(file.name);
+    if (type === 'sflist-legacy') {
+      const doc = parseLegacySflist(text);
+      store.loadDocument(doc, file.name + '.json');
+    } else {
+      store.loadFromJson(text, file.name);
+    }
     $q.notify({ type: 'positive', message: `Opened ${file.name}` });
   } catch (err) {
     $q.notify({

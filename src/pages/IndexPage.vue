@@ -39,7 +39,7 @@
     <input
       ref="addFileInput"
       type="file"
-      accept=".sf2,.sf3,.sfz,.dls,.sflist.json,.json"
+      accept=".sf2,.sf3,.sfz,.dls,.sflist.json,.json,.sflist"
       multiple
       style="display: none"
       @change="onFilePicked"
@@ -52,6 +52,7 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue';
 import { useSflistStore } from 'stores/sflist-store';
 import { useSoundbankCacheStore } from 'stores/soundbank-cache-store';
 import { getFileType } from 'src/types/sflist';
+import { parseLegacySflist } from 'src/utils/sflist-legacy-parser';
 import type { SoundFontEntry } from 'src/types/sflist';
 import EmptyState from 'components/EmptyState.vue';
 import SoundFontEntryCard from 'components/SoundFontEntryCard.vue';
@@ -94,9 +95,14 @@ async function onFilePicked(event: Event) {
       const name = file.name;
       const type = getFileType(name);
 
-      if (type === 'sflist') {
+      if (type === 'sflist' || type === 'sflist-legacy') {
         const text = await file.text();
-        store.loadFromJson(text, name);
+        if (type === 'sflist-legacy') {
+          const doc = parseLegacySflist(text);
+          store.loadDocument(doc, file.name + '.json');
+        } else {
+          store.loadFromJson(text, name);
+        }
         break;
       }
 
@@ -119,9 +125,7 @@ async function onFilePicked(event: Event) {
 }
 
 function openSflist() {
-  const input = document.querySelector<HTMLInputElement>(
-    'input[accept=".sflist.json,.json"]',
-  );
+  const input = document.querySelector<HTMLInputElement>('[data-open-sflist]');
   input?.click();
 }
 </script>

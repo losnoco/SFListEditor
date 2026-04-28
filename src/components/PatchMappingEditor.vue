@@ -9,78 +9,39 @@
       <div>
         <div class="sec-label">Destination</div>
         <div class="row q-gutter-sm">
-          <q-input
-            v-model.number="destBank"
-            type="number"
-            label="Bank"
-            dense
-            outlined
-            :rules="[bankRule]"
-            class="col"
-          />
-          <q-input
-            v-model.number="destProgram"
-            type="number"
-            label="Program"
-            dense
-            outlined
-            hint="Leave empty for all"
-            class="col"
-            clearable
-            @clear="destProgram = undefined"
-          />
+          <q-input v-model.number="destBank" type="number" label="Bank" dense outlined :rules="[bankRule]"
+            class="col" />
+          <q-input v-model.number="destProgram" type="number" label="Program" dense outlined hint="Leave empty for all"
+            class="col" clearable @clear="destProgram = undefined" />
         </div>
       </div>
 
       <!-- Source (hidden for SFZ) -->
       <div v-if="!isSfz">
-        <div class="sec-label">Source</div>
+        <div class="row items-center q-mb-sm">
+          <div class="sec-label q-mr-auto">Source</div>
+          <q-btn-toggle v-if="presets.length > 0" v-model="useManualSource" :options="[
+            { label: 'Preset', value: false },
+            { label: 'Manual', value: true },
+          ]" flat dense no-caps toggle-color="primary" size="sm" />
+        </div>
 
-        <PresetPicker
-          v-if="presets.length > 0"
-          :presets="presets"
-          :model-value="sourceFromPicker"
-          class="q-mb-sm"
-          @update:model-value="applyPresetPick"
-        />
+        <PresetPicker v-if="presets.length > 0 && !useManualSource" :presets="presets" :model-value="sourceFromPicker"
+          class="q-mb-sm" @update:model-value="applyPresetPick" />
 
-        <div class="row q-gutter-sm">
-          <q-input
-            v-model.number="srcBank"
-            type="number"
-            label="Bank"
-            dense
-            outlined
-            hint="Leave empty for all"
-            class="col"
-            clearable
-            @clear="srcBank = undefined"
-          />
-          <q-input
-            v-model.number="srcProgram"
-            type="number"
-            label="Program"
-            dense
-            outlined
-            hint="Leave empty for all"
-            class="col"
-            clearable
-            @clear="srcProgram = undefined"
-          />
+        <div v-if="useManualSource" class="row q-gutter-sm">
+          <q-input v-model.number="srcBank" type="number" label="Bank" dense outlined hint="Leave empty for all"
+            class="col" clearable @clear="srcBank = undefined" />
+          <q-input v-model.number="srcProgram" type="number" label="Program" dense outlined hint="Leave empty for all"
+            class="col" clearable @clear="srcProgram = undefined" />
         </div>
       </div>
     </q-card-section>
 
     <q-card-actions align="right">
       <q-btn flat label="Cancel" v-close-popup />
-      <q-btn
-        unelevated
-        label="Save"
-        color="primary"
-        :disable="destBank === undefined || destBank === null"
-        v-close-popup
-        @click="save"
-      />
+      <q-btn unelevated label="Save" color="primary" :disable="destBank === undefined || destBank === null"
+        v-close-popup @click="save" />
     </q-card-actions>
   </q-card>
 </template>
@@ -106,6 +67,9 @@ const destProgram = ref<number | undefined>(
 );
 const srcBank = ref<number | undefined>(props.mapping?.source?.bank);
 const srcProgram = ref<number | undefined>(props.mapping?.source?.program);
+const useManualSource = ref<boolean>(
+  props.presets.length === 0 || props.mapping?.source !== undefined,
+);
 
 const sourceFromPicker = computed<PatchAddress | undefined>(() => {
   if (srcBank.value !== undefined && srcProgram.value !== undefined) {
